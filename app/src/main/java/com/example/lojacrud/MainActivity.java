@@ -21,7 +21,6 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.io.Serializable;
 
-
 public class MainActivity extends AppCompatActivity{
 
     private Toolbar toolbar;
