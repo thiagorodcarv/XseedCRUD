@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity{
     private TabLayout tabLayout;
     private Auxiliar auxiliar;
     private ListDataModel pViewModel;
-    //public static List<Produtos> produtosSelecionados = new ArrayList();
     private ProdutosDAO produtosDAO;
     private HistoricoDAO historicoDAO;
     public static FloatingActionButton fab;
