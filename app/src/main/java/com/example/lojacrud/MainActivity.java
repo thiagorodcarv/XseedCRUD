@@ -18,7 +18,6 @@ import com.example.lojacrud.BancoPackage.ProdutosDAO;
 import com.example.lojacrud.CarrinhoPackage.Carrinho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity{
