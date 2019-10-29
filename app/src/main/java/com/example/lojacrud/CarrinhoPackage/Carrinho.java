@@ -49,7 +49,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
     }
 
     @Override
-    public void QuantidadeChanged(int position, String s) {
+    public void quantidadeChanged(int position, String s) {
         try {
             if (s.equals("")){
                 precoTotal = 0;
@@ -67,6 +67,12 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
 
     }
 
+    @Override
+    public void deleteItem(int position) {
+        produtosCarrinho.remove(produtosCarrinho.get(position));
+        carrinhoAdapter.notifyDataSetChanged();
+    }
+
     public void setPrecoTotalView() {
         Integer precoDescontado;
         for(Produtos p : produtosCarrinho){
@@ -82,7 +88,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
     }
 
     public void realizarCompra(View view) {
-        if (produtosCarrinho == null) {
+        if (produtosCarrinho.size()==0) {
             Toast.makeText(this, "Não há nenhum item no carrinho", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -136,4 +142,6 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
             carrinhoAdapter.notifyDataSetChanged();
         }
     };
+
+
 }

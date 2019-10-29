@@ -55,6 +55,9 @@ public class ProdutosAdapter extends RecyclerView.Adapter {
         if ((pViewModel.mapaChecks!=null)&&pViewModel.mapaChecks.containsKey(produto.getId())){
             holder.checkBox.setChecked(pViewModel.mapaChecks.get(produto.getId()));
         }
+        else {
+            holder.checkBox.setChecked(false);
+        }
         holder.nome.setText(produto.getNome());
         holder.departamento.setText(produto.getDepartamento());
         holder.preco.setText(produto.getPreco());

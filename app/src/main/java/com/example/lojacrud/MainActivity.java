@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onResume() {
         super.onResume();
         pViewModel.mapaChecks.clear();
-
         pViewModel.produtosSelecionados.clear();
         pViewModel.produtosBanco.clear();
         pViewModel.produtosHistorico.clear();
