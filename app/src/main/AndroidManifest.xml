@@ -20,7 +20,8 @@
         <activity
             android:name=".PopUp"
             android:theme="@style/AppTheme.CustomTheme" />
-        <activity android:name=".CadastroActivity" />
+        <activity android:name=".CadastroActivity"
+            android:configChanges="orientation"/>
         <activity android:name=".MainActivity"
             android:configChanges="orientation">
             <intent-filter>

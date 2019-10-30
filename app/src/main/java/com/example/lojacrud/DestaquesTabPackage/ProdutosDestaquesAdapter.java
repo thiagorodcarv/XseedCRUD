@@ -70,7 +70,6 @@ public class ProdutosDestaquesAdapter extends RecyclerView.Adapter {
             Bitmap photoAux = Bitmap.createScaledBitmap(photoBitmap,photoBitmap.getWidth(),photoBitmap.getWidth(),false);
             RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), photoAux);
             roundedBitmapDrawable.setCircular(true);
-            //roundedBitmapDrawable.setTargetDensity(photo.getDensity());
             holder.imagem.setImageDrawable(roundedBitmapDrawable);
         }
         else {

@@ -81,8 +81,6 @@ public class CadastroActivity extends Activity {
         }
     }
 
-    //TODO deixar de forma assincrona
-
     public void salvar(View view){
         if (produtos == null) {
             produtos = new Produtos();
@@ -122,3 +120,4 @@ public class CadastroActivity extends Activity {
         }
     }
 }
+
