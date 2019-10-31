@@ -5,6 +5,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.example.lojacrud.BancoPackage.ProdutosDAO;
 
 import java.io.File;
 import java.io.FileOutputStream;
+
+import static com.example.lojacrud.R.*;
 
 public class CadastroActivity extends Activity {
     private static final int CAMERA_REQUEST = 1888;
@@ -35,14 +38,21 @@ public class CadastroActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro);
+        setContentView(layout.activity_cadastro);
 
-        nome = findViewById(R.id.txt_Nome);
-        preco = findViewById(R.id.txt_Preco);
-        departamento = findViewById(R.id.txt_Departamento);
-        precodesconto = findViewById(R.id.txt_Desconto);
-        imageView = findViewById(R.id.imgFundo);
+        nome = findViewById(id.txt_Nome);
+        preco = findViewById(id.txt_Preco);
+        departamento = findViewById(id.txt_Departamento);
+        precodesconto = findViewById(id.txt_Desconto);
+        imageView = findViewById(id.imgFundo);
         dao = new ProdutosDAO(this);
+
+        Resources res = getResources();
+        Bitmap src = BitmapFactory.decodeResource(res, drawable.xseed);
+        RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
+        dr.setCornerRadius(Math.max(src.getWidth(), src.getHeight()) / 2.0f);
+        imageView.setImageDrawable(dr);
+
 
         Intent intent = getIntent();
         if(intent.hasExtra("produto")){
@@ -119,5 +129,13 @@ public class CadastroActivity extends Activity {
             e.printStackTrace();
         }
     }
+
+    public boolean verificaString(String s){
+        if(s.trim().length()==0){
+            return false;
+        }
+        else return true;
+    }
+
 }
 
