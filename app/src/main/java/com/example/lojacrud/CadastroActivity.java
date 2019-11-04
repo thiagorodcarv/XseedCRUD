@@ -31,6 +31,8 @@ public class CadastroActivity extends Activity {
     private ImageView imageView;
     private ProdutosDAO dao;
     private Bitmap photo = null;
+    private boolean insert = true;
+    private boolean transacaoConcluida = false;
     private Produtos produtos = null;
     static public String filePath = "MyFileStorage";
     File myExternalFile;
@@ -56,6 +58,7 @@ public class CadastroActivity extends Activity {
 
         Intent intent = getIntent();
         if(intent.hasExtra("produto")){
+            insert = false;
             produtos = (Produtos) intent.getSerializableExtra("produto");
             nome.setText(produtos.getNome());
             preco.setText(produtos.getPreco());
@@ -92,28 +95,41 @@ public class CadastroActivity extends Activity {
     }
 
     public void salvar(View view){
-        if (produtos == null) {
+        if (insert) {
             produtos = new Produtos();
             produtos.setNome(nome.getText().toString());
             produtos.setDepartamento(departamento.getText().toString());
             produtos.setPreco(preco.getText().toString());
             produtos.setPrecoDesconto(precodesconto.getText().toString());
-            long id = dao.inserirProduto(produtos);
-            produtos.setId((int) id);
-            Toast.makeText(this, "produto inserido de id: " + produtos.getId(), Toast.LENGTH_SHORT).show();
+            if(verificaString(produtos.getNome())||verificaString(produtos.getDepartamento())||verificaString(produtos.getPreco())){
+                Toast.makeText(this, "Campo obrigatório não preenchido", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                long id = dao.inserirProduto(produtos);
+                produtos.setId((int) id);
+                transacaoConcluida = true;
+                Toast.makeText(this, "produto inserido de id: " + produtos.getId(), Toast.LENGTH_SHORT).show();
+            }
         }
         else {
             produtos.setNome(nome.getText().toString());
             produtos.setDepartamento(departamento.getText().toString());
             produtos.setPreco(preco.getText().toString());
             produtos.setPrecoDesconto(precodesconto.getText().toString());
-            dao.atualizar(produtos);
-            Toast.makeText(this, "produto atualizado de id: " + produtos.getId(), Toast.LENGTH_SHORT).show();
+            if(verificaString(produtos.getNome())||verificaString(produtos.getDepartamento())||verificaString(produtos.getPreco())){
+                Toast.makeText(this, "Campo obrigatório não preenchido", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                dao.atualizar(produtos);
+                transacaoConcluida = true;
+                Toast.makeText(this, "produto atualizado de id: " + produtos.getId(), Toast.LENGTH_SHORT).show();
+            }
         }
 
 
-        if (photo != null){
+        if (photo != null && transacaoConcluida){
             createDirectoryAndSaveFile(photo,Long.toString(produtos.getId()));
+            finish();
         }
     }
 
@@ -132,9 +148,9 @@ public class CadastroActivity extends Activity {
 
     public boolean verificaString(String s){
         if(s.trim().length()==0){
-            return false;
+            return true;
         }
-        else return true;
+        else return false;
     }
 
 }

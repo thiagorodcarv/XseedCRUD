@@ -99,6 +99,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Pedido");
             emailIntent.putExtra(Intent.EXTRA_TEXT, gerarPedido(produtosCarrinho));
             startActivity(Intent.createChooser(emailIntent, "Enviando pedido..."));
+            finish();
         }
     }
 

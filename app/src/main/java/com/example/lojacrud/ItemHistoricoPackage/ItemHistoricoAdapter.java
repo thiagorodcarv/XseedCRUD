@@ -44,7 +44,12 @@ public class ItemHistoricoAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         ItemHistoricoViewHolder holder = (ItemHistoricoViewHolder) viewHolder;
         Produtos produto = produtos.get(position);
-        holder.nome.setText(produto.getNome());
+        if (produto.getNome()==null){
+            holder.nome.setText("Produto indisponivel");
+        }
+        else {
+            holder.nome.setText(produto.getNome());
+        }
         holder.departamento.setText(produto.getDepartamento());
         holder.preco.setText(produto.getPreco());
         File photo;
@@ -59,7 +64,7 @@ public class ItemHistoricoAdapter extends RecyclerView.Adapter {
         }
         else {
             Resources res = context.getResources();
-            Bitmap src = BitmapFactory.decodeResource(res, R.drawable.waifu);
+            Bitmap src = BitmapFactory.decodeResource(res, R.drawable.indisponivel);
             RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
             dr.setCornerRadius(Math.max(src.getWidth(), src.getHeight()) / 2.0f);
             holder.imagem.setImageDrawable(dr);

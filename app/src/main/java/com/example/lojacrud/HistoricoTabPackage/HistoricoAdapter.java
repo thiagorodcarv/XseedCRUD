@@ -45,7 +45,7 @@ public class HistoricoAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         HistoricoViewHolder holder = (HistoricoViewHolder) viewHolder;
         String data = dataDeCompras.get(position);
-        data = "Dia: "+ data.split(" ")[0] + ", hora: " + data.split(" ")[1];
+        data = "Dia: "+ data.split(" ")[0] + "\nhora: " + data.split(" ")[1];
         holder.data.setText(data);
     }
 

@@ -52,7 +52,7 @@ public class HistoricoDAO {
     public List<Produtos> recuperarProdutosHistorico(){
         Cursor cursor = banco.rawQuery("SELECT p.nome as produto_nome, p.id as produto_id, p.departamento as produto_departamento," +
                 "v.data as data_venda, v.preco_cada as preco_venda, v.quantidade as quantidade_venda" +
-                " FROM produtos p, vendas v WHERE p.id = v.id_produto ORDER BY data_venda DESC",null);
+                " FROM vendas v LEFT JOIN produtos p ON p.id = v.id_produto ORDER BY data_venda DESC",null);
         List<Produtos> produtos = new ArrayList<Produtos>();
         while (cursor.moveToNext()){
             Produtos p = new Produtos();
