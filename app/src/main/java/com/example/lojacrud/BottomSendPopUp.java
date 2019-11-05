@@ -85,33 +85,5 @@ public class BottomSendPopUp extends BottomSheetDialogFragment {
         return numeroDeItensComprados;
     }
 
-//    public void sendEmail(View view){
-//        long numeroDeItensComprados = inserirCompras(dao,produtosCarrinho);
-//            Toast.makeText(getActivity(), numeroDeItensComprados+" itens comprados", Toast.LENGTH_SHORT).show();
-//            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-//                    "mailto", "loja@xseed.com", null));
-//            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Pedido");
-//            emailIntent.putExtra(Intent.EXTRA_TEXT, conteudo);
-//            startActivity(Intent.createChooser(emailIntent, "Enviando pedido..."));
-//    }
-
-//    public String gerarPedido(List<Produtos> produtosCarrinho){
-//        String conteudo = "Comprado: \n";
-//        Integer precoDescontado;
-//
-//        for(Produtos p : produtosCarrinho){
-//            if (p.getQuantidade()!=0) {
-//                if ((p.getPrecoDesconto()==null)||p.getPrecoDesconto().equals("")) {
-//                    precoDescontado = Integer.valueOf(p.getPreco());
-//                } else {
-//                    precoDescontado = Integer.valueOf(p.getPreco()) - Integer.valueOf(p.getPrecoDesconto());
-//                }
-//                conteudo += p.getQuantidade().toString() + ", " + p.getNome() + " por " + precoDescontado + " cada \n";
-//            }
-//
-//        }
-//        conteudo += "\t totalizando o valor de: "+ precoTotal.toString();
-//        return conteudo;
-//    }
 
 }
