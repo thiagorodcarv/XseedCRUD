@@ -95,25 +95,9 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
         else{
             BottomSendPopUp bottomSendPopUp = new BottomSendPopUp(dao,produtosCarrinho,gerarPedido(produtosCarrinho));
             bottomSendPopUp.show(getSupportFragmentManager(),"example");
-//            long numeroDeItensComprados = inserirCompras(dao,produtosCarrinho);
-//            Toast.makeText(this, numeroDeItensComprados+" itens comprados", Toast.LENGTH_SHORT).show();
-//            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-//                    "mailto", "loja@xseed.com", null));
-//            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Pedido");
-//            emailIntent.putExtra(Intent.EXTRA_TEXT, gerarPedido(produtosCarrinho));
-//            startActivity(Intent.createChooser(emailIntent, "Enviando pedido..."));
-//            finish();
         }
     }
 
-//    public long inserirCompras(HistoricoDAO dao, List<Produtos> produtos){
-//        long numeroDeItensComprados = 0;
-//        for (Produtos p : produtos){
-//            dao.inserirVenda(p);
-//            numeroDeItensComprados++;
-//        }
-//        return numeroDeItensComprados;
-//    }
 
     public String gerarPedido(List<Produtos> produtosCarrinho){
         String conteudo = "Comprado: \n";
