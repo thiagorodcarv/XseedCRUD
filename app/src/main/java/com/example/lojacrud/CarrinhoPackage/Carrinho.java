@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lojacrud.BancoPackage.HistoricoDAO;
+import com.example.lojacrud.BottomSendPopUp;
 import com.example.lojacrud.Produtos;
 import com.example.lojacrud.R;
 
@@ -92,25 +93,27 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
             Toast.makeText(this, "Não há nenhum item no carrinho", Toast.LENGTH_SHORT).show();
         }
         else{
-            long numeroDeItensComprados = inserirCompras(dao,produtosCarrinho);
-            Toast.makeText(this, numeroDeItensComprados+" itens comprados", Toast.LENGTH_SHORT).show();
-            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                    "mailto", "loja@xseed.com", null));
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Pedido");
-            emailIntent.putExtra(Intent.EXTRA_TEXT, gerarPedido(produtosCarrinho));
-            startActivity(Intent.createChooser(emailIntent, "Enviando pedido..."));
-            finish();
+            BottomSendPopUp bottomSendPopUp = new BottomSendPopUp(dao,produtosCarrinho,gerarPedido(produtosCarrinho));
+            bottomSendPopUp.show(getSupportFragmentManager(),"example");
+//            long numeroDeItensComprados = inserirCompras(dao,produtosCarrinho);
+//            Toast.makeText(this, numeroDeItensComprados+" itens comprados", Toast.LENGTH_SHORT).show();
+//            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+//                    "mailto", "loja@xseed.com", null));
+//            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Pedido");
+//            emailIntent.putExtra(Intent.EXTRA_TEXT, gerarPedido(produtosCarrinho));
+//            startActivity(Intent.createChooser(emailIntent, "Enviando pedido..."));
+//            finish();
         }
     }
 
-    public long inserirCompras(HistoricoDAO dao, List<Produtos> produtos){
-        long numeroDeItensComprados = 0;
-        for (Produtos p : produtos){
-            dao.inserirVenda(p);
-            numeroDeItensComprados++;
-        }
-        return numeroDeItensComprados;
-    }
+//    public long inserirCompras(HistoricoDAO dao, List<Produtos> produtos){
+//        long numeroDeItensComprados = 0;
+//        for (Produtos p : produtos){
+//            dao.inserirVenda(p);
+//            numeroDeItensComprados++;
+//        }
+//        return numeroDeItensComprados;
+//    }
 
     public String gerarPedido(List<Produtos> produtosCarrinho){
         String conteudo = "Comprado: \n";
@@ -127,7 +130,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
             }
 
         }
-        conteudo += "\t totalizando o valor de:"+ precoTotal.toString();
+        conteudo += "\t totalizando o valor de: "+ precoTotal.toString();
         return conteudo;
     }
 

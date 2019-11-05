@@ -41,4 +41,10 @@ public class ImagemDetalhesPopUp extends AppCompatActivity {
 
         getWindow().setLayout((int) (width*.8),(int)(height*.6));
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 }
