@@ -56,10 +56,21 @@ public class ItemHistoricoActivity extends AppCompatActivity {
         return itensRecuperados;
     }
 
+    public List<Produtos> recuperaListaParaCarrinho(List<Produtos> produtos){
+        List<Produtos> itensRecuperados = new ArrayList<>();
+
+        for(Produtos p: produtos){
+            if (!(p.getNome()==null||p.getNome().equals(""))){
+                itensRecuperados.add(p);
+            }
+        }
+
+        return itensRecuperados;
+    }
 
     public void chamarCarrinho(View view){
         Intent intent = new Intent(this, Carrinho.class);
-        intent.putExtra("produtosSelecionados", (Serializable) produtosHistoricoView);
+        intent.putExtra("produtosSelecionados", (Serializable) recuperaListaParaCarrinho(produtosHistoricoView));
         startActivity(intent);
     }
 

@@ -71,6 +71,9 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
     @Override
     public void deleteItem(int position) {
         produtosCarrinho.remove(produtosCarrinho.get(position));
+        if (produtosCarrinho.size()==0){
+            precoTotalView.setText("0");
+        }
         carrinhoAdapter.notifyDataSetChanged();
     }
 
@@ -127,6 +130,9 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             produtosCarrinho.remove(viewHolder.getAdapterPosition());
+            if (produtosCarrinho.size()==0){
+                precoTotalView.setText("0");
+            }
             carrinhoAdapter.notifyDataSetChanged();
         }
     };

@@ -22,7 +22,7 @@
             android:onClick="chamarCarrinho"
             android:src="@drawable/cart"
             android:visibility="visible"
-            app:backgroundTint="@android:color/darker_gray"
+            app:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
