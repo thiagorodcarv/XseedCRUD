@@ -25,7 +25,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
 
     private List<Produtos> produtosCarrinho = new ArrayList<>();
     private List<Produtos> produtosCarrinhoView = new ArrayList<>();
-    private Integer precoTotal = 0;
+    private Double precoTotal = 0.0;
     private RecyclerView recyclerView;
     private CarrinhoAdapter carrinhoAdapter;
     private TextView precoTotalView;
@@ -54,12 +54,12 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
     public void quantidadeChanged(int position, String s) {
         try {
             if (s.equals("")){
-                precoTotal = 0;
+                precoTotal = 0.0;
                 produtosCarrinho.get(position).setQuantidade(0);
                 setPrecoTotalView();
             }
             else {
-                precoTotal = 0;
+                precoTotal = 0.0;
                 produtosCarrinho.get(position).setQuantidade(Integer.valueOf(s));
                 setPrecoTotalView();
             }
@@ -79,15 +79,15 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
     }
 
     public void setPrecoTotalView() {
-        Integer precoDescontado;
+        Double precoDescontado;
         for(Produtos p : produtosCarrinho){
             if ((p.getPrecoDesconto()==null)||p.getPrecoDesconto().equals("")){
-                precoDescontado = Integer.valueOf(p.getPreco());
+                precoDescontado = Double.valueOf(p.getPreco());
             }
             else {
-                precoDescontado = Integer.valueOf(p.getPreco()) - Integer.valueOf(p.getPrecoDesconto());
+                precoDescontado = Double.valueOf(p.getPreco()) - Integer.valueOf(p.getPrecoDesconto());
             }
-            precoTotal += p.getQuantidade()*Integer.valueOf(precoDescontado);
+            precoTotal += p.getQuantidade()*Double.valueOf(precoDescontado);
         }
         precoTotalView.setText(precoTotal.toString());
     }
@@ -105,14 +105,14 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
 
     public String gerarPedido(List<Produtos> produtosCarrinho){
         String conteudo = "Comprado: \n";
-        Integer precoDescontado;
+        Double precoDescontado;
 
         for(Produtos p : produtosCarrinho){
             if (p.getQuantidade()!=0) {
                 if ((p.getPrecoDesconto()==null)||p.getPrecoDesconto().equals("")) {
-                    precoDescontado = Integer.valueOf(p.getPreco());
+                    precoDescontado = Double.valueOf(p.getPreco());
                 } else {
-                    precoDescontado = Integer.valueOf(p.getPreco()) - Integer.valueOf(p.getPrecoDesconto());
+                    precoDescontado = Double.valueOf(p.getPreco()) - Double.valueOf(p.getPrecoDesconto());
                 }
                 conteudo += p.getQuantidade().toString() + ", " + p.getNome() + " por " + precoDescontado + " cada \n";
             }

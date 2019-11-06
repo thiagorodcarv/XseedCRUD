@@ -47,12 +47,12 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
         Produtos produto = produtos.get(position);
         holder.nome.setText(produto.getNome());
         holder.departamento.setText(produto.getDepartamento());
-        Integer precoTotal;
+        Double precoTotal;
         if ((produto.getPrecoDesconto()==null)||(produto.getPrecoDesconto().equals(""))){
-            precoTotal = Integer.valueOf(produto.getPreco());
+            precoTotal = Double.valueOf(produto.getPreco());
         }
         else {
-            precoTotal = Integer.valueOf(produto.getPreco()) - Integer.valueOf(produto.getPrecoDesconto());
+            precoTotal = Double.valueOf(produto.getPreco()) - Double.valueOf(produto.getPrecoDesconto());
         }
         holder.preco.setText(precoTotal.toString());
         File photo;

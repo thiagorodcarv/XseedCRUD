@@ -61,7 +61,7 @@ public class ProdutosDestaquesAdapter extends RecyclerView.Adapter {
         holder.nome.setText(produto.getNome());
         holder.departamento.setText(produto.getDepartamento());
         holder.preco.setText(produto.getPreco());
-        Integer precoAtual = (Integer.valueOf(produto.getPreco()) - Integer.valueOf(produto.getPrecoDesconto()));
+        Double precoAtual = (Double.valueOf(produto.getPreco()) - Double.valueOf(produto.getPrecoDesconto()));
         holder.precoDesconto.setText(precoAtual.toString());
         File photo;
         photo = new File((context.getExternalFilesDir(filePath))+"/"+produto.getId());

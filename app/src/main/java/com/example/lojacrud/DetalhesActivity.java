@@ -53,8 +53,8 @@ public class DetalhesActivity extends AppCompatActivity {
             desconto.setText(produto.getPrecoDesconto());
             txtViewDesconto.setVisibility(View.VISIBLE);
             txtViewAtual.setVisibility(View.VISIBLE);
-            Integer totalAtual;
-            totalAtual = Integer.valueOf(produto.getPreco()) - Integer.valueOf(produto.getPrecoDesconto());
+            Double totalAtual;
+            totalAtual = Double.valueOf(produto.getPreco()) - Double.valueOf(produto.getPrecoDesconto());
             precoAtual.setVisibility(View.VISIBLE);
             precoAtual.setText(totalAtual.toString());
         }

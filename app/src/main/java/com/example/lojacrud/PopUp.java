@@ -7,9 +7,11 @@ import androidx.lifecycle.ViewModelProviders;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,6 +30,7 @@ public class PopUp extends AppCompatActivity {
     private Produtos produto;
     private ListDataModel pViewModel;
     private ProdutosDAO dao;
+    View layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +40,12 @@ public class PopUp extends AppCompatActivity {
         produto = (Produtos) intent.getSerializableExtra("produto");
         pViewModel = ViewModelProviders.of(this).get(ListDataModel.class);
         dao = new ProdutosDAO(this);
-
+        layout =  findViewById(R.id.pop_up_back);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
+
 
         nome = findViewById(R.id.pop_nome_produto);
         perfil = findViewById(R.id.photo_produto_popup);
@@ -58,7 +61,8 @@ public class PopUp extends AppCompatActivity {
             perfil.setImageBitmap(photoBitmap);
         }
 
-        getWindow().setLayout((int) (width*.8),(int)(height*.6));
+        getWindow().setLayout((int) (width*.8),(int)(height*.58));
+
     }
 
 

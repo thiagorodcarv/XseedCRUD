@@ -2,58 +2,73 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="#80000000"
+    android:id="@+id/pop_up_back"
+    android:layout_height="match_parent"
     tools:context=".PopUp">
-    <ImageView
-        android:id="@+id/photo_produto_popup"
-        android:layout_width="297dp"
-        android:layout_height="307dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginLeft="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/waifu" />
+        app:layout_constraintVertical_weight="1">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/pop_nome_produto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photo_produto_popup" />
+            <ImageView
+                android:id="@+id/photo_produto_popup"
+                android:layout_width="297dp"
+                android:layout_height="307dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/waifu" />
 
-    <Button
-        android:id="@+id/atualizar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Atualizar"
-        android:onClick="atualizar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pop_nome_produto" />
+        <TextView
+            android:id="@+id/pop_nome_produto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photo_produto_popup" />
 
-    <Button
-        android:id="@+id/excluir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Excluir"
-        android:onClick="excluir"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pop_nome_produto" />
+        <Button
+            android:id="@+id/atualizar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atualizar"
+            android:onClick="atualizar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pop_nome_produto" />
 
-    <Button
-        android:id="@+id/Detalhes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Detalhes"
-        android:onClick="detalhes"
-        app:layout_constraintEnd_toStartOf="@+id/excluir"
-        app:layout_constraintStart_toEndOf="@+id/atualizar"
-        app:layout_constraintTop_toBottomOf="@+id/pop_nome_produto" />
+        <Button
+            android:id="@+id/excluir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Excluir"
+            android:onClick="excluir"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pop_nome_produto" />
+
+        <Button
+            android:id="@+id/Detalhes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalhes"
+            android:onClick="detalhes"
+            app:layout_constraintEnd_toStartOf="@+id/excluir"
+            app:layout_constraintStart_toEndOf="@+id/atualizar"
+            app:layout_constraintTop_toBottomOf="@+id/pop_nome_produto" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
