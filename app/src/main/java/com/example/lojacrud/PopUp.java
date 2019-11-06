@@ -1,5 +1,6 @@
 package com.example.lojacrud;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -76,13 +77,14 @@ public class PopUp extends AppCompatActivity {
                     }
                 }).create();
         dialog.show();
+        finish();
     }
 
     public void atualizar(View view){
         final Produtos produtoAtualizar = produto;
         Intent intent = new Intent(this,CadastroActivity.class);
         intent.putExtra("produto",produtoAtualizar);
-        startActivity(intent);
+        startActivityForResult(intent,1);
     }
 
     public void detalhes(View view){
@@ -90,6 +92,20 @@ public class PopUp extends AppCompatActivity {
         Intent intent = new Intent(this,DetalhesActivity.class);
         intent.putExtra("produto",produtoDetalhes);
         startActivity(intent);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        produto = (Produtos) data.getSerializableExtra("result");
+        nome.setText(produto.getNome());
+        File photo;
+        photo = new File((getExternalFilesDir(filePath))+"/"+produto.getId());
+        if(photo.exists()){
+            Bitmap photoBitmap = BitmapFactory.decodeFile(photo.toString());
+            perfil.setImageBitmap(photoBitmap);
+        }
     }
 
     @Override

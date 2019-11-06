@@ -33,7 +33,7 @@ public class CadastroActivity extends Activity {
     private Bitmap photo = null;
     private boolean insert = true;
     private boolean transacaoConcluida = false;
-    private Produtos produtos = null;
+    private Produtos produto = null;
     static public String filePath = "MyFileStorage";
     File myExternalFile;
 
@@ -59,13 +59,13 @@ public class CadastroActivity extends Activity {
         Intent intent = getIntent();
         if(intent.hasExtra("produto")){
             insert = false;
-            produtos = (Produtos) intent.getSerializableExtra("produto");
-            nome.setText(produtos.getNome());
-            preco.setText(produtos.getPreco());
-            departamento.setText(produtos.getDepartamento());
-            precodesconto.setText(produtos.getPrecoDesconto());
+            produto = (Produtos) intent.getSerializableExtra("produto");
+            nome.setText(produto.getNome());
+            preco.setText(produto.getPreco());
+            departamento.setText(produto.getDepartamento());
+            precodesconto.setText(produto.getPrecoDesconto());
             File photo;
-            photo = new File((getExternalFilesDir(filePath))+"/"+produtos.getId());
+            photo = new File((getExternalFilesDir(filePath))+"/"+ produto.getId());
             if(photo.exists()){
                 Bitmap photoBitmap = BitmapFactory.decodeFile(photo.toString());
                 //Bitmap photoAux = Bitmap.createScaledBitmap(photoBitmap,photoBitmap.getWidth(),photoBitmap.getWidth(),false);
@@ -96,40 +96,50 @@ public class CadastroActivity extends Activity {
 
     public void salvar(View view){
         if (insert) {
-            produtos = new Produtos();
-            produtos.setNome(nome.getText().toString());
-            produtos.setDepartamento(departamento.getText().toString());
-            produtos.setPreco(preco.getText().toString());
-            produtos.setPrecoDesconto(precodesconto.getText().toString());
-            if(verificaString(produtos.getNome())||verificaString(produtos.getDepartamento())||verificaString(produtos.getPreco())){
+            produto = new Produtos();
+            produto.setNome(nome.getText().toString());
+            produto.setDepartamento(departamento.getText().toString());
+            produto.setPreco(preco.getText().toString());
+            produto.setPrecoDesconto(precodesconto.getText().toString());
+            if(verificaString(produto.getNome())||verificaString(produto.getDepartamento())||verificaString(produto.getPreco())){
                 Toast.makeText(this, "Campo obrigatório não preenchido", Toast.LENGTH_SHORT).show();
             }
             else {
-                long id = dao.inserirProduto(produtos);
-                produtos.setId((int) id);
+                long id = dao.inserirProduto(produto);
+                produto.setId((int) id);
                 transacaoConcluida = true;
-                Toast.makeText(this, "produto inserido de id: " + produtos.getId(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "produto inserido de id: " + produto.getId(), Toast.LENGTH_SHORT).show();
             }
         }
         else {
-            produtos.setNome(nome.getText().toString());
-            produtos.setDepartamento(departamento.getText().toString());
-            produtos.setPreco(preco.getText().toString());
-            produtos.setPrecoDesconto(precodesconto.getText().toString());
-            if(verificaString(produtos.getNome())||verificaString(produtos.getDepartamento())||verificaString(produtos.getPreco())){
+            produto.setNome(nome.getText().toString());
+            produto.setDepartamento(departamento.getText().toString());
+            produto.setPreco(preco.getText().toString());
+            produto.setPrecoDesconto(precodesconto.getText().toString());
+            if(verificaString(produto.getNome())||verificaString(produto.getDepartamento())||verificaString(produto.getPreco())){
                 Toast.makeText(this, "Campo obrigatório não preenchido", Toast.LENGTH_SHORT).show();
             }
             else {
-                dao.atualizar(produtos);
+                dao.atualizar(produto);
                 transacaoConcluida = true;
-                Toast.makeText(this, "produto atualizado de id: " + produtos.getId(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "produto atualizado de id: " + produto.getId(), Toast.LENGTH_SHORT).show();
             }
         }
 
 
-        if (photo != null && transacaoConcluida){
-            createDirectoryAndSaveFile(photo,Long.toString(produtos.getId()));
-            finish();
+        if (transacaoConcluida){
+            if (photo != null){
+                createDirectoryAndSaveFile(photo,Long.toString(produto.getId()));
+            }
+            if (insert){
+                finish();
+            }
+            else {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("result", produto);
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+            }
         }
     }
 

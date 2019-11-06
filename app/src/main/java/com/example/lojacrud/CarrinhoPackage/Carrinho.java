@@ -47,6 +47,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
         recyclerView.setAdapter(carrinhoAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         carrinhoAdapter.notifyDataSetChanged();
+        setPrecoTotalView();
     }
 
     @Override
@@ -92,7 +93,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
     }
 
     public void realizarCompra(View view) {
-        if (produtosCarrinho.size()==0) {
+        if (produtosCarrinho.size()==0 || precoTotalView.getText().equals("0")) {
             Toast.makeText(this, "Não há nenhum item no carrinho", Toast.LENGTH_SHORT).show();
         }
         else{
