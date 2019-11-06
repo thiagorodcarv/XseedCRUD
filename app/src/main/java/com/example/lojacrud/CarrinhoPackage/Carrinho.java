@@ -85,7 +85,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
                 precoDescontado = Double.valueOf(p.getPreco());
             }
             else {
-                precoDescontado = Double.valueOf(p.getPreco()) - Integer.valueOf(p.getPrecoDesconto());
+                precoDescontado = Double.valueOf(p.getPreco()) - Double.valueOf(p.getPrecoDesconto());
             }
             precoTotal += p.getQuantidade()*Double.valueOf(precoDescontado);
         }
@@ -93,7 +93,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener {
     }
 
     public void realizarCompra(View view) {
-        if (produtosCarrinho.size()==0 || precoTotalView.getText().equals("0")) {
+        if (produtosCarrinho.size()==0 || precoTotalView.getText().equals("0.0")) {
             Toast.makeText(this, "Não há nenhum item no carrinho", Toast.LENGTH_SHORT).show();
         }
         else{

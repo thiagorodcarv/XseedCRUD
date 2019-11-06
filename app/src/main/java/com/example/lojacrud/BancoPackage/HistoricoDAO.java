@@ -26,7 +26,7 @@ public class HistoricoDAO {
             values.put("preco_cada",produtos.getPreco().toString());
         }
         else {
-            Integer precoTotal = Integer.valueOf(produtos.getPreco()) - Integer.valueOf(produtos.getPrecoDesconto());
+            Float precoTotal = Float.valueOf(produtos.getPreco()) - Float.valueOf(produtos.getPrecoDesconto());
             values.put("preco_cada",precoTotal.toString());
         }
 
