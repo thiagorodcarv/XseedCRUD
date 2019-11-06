@@ -17,6 +17,7 @@ import com.example.lojacrud.R;
 public class CarrinhoHolder extends RecyclerView.ViewHolder implements TextWatcher,Button.OnClickListener{
     final TextView nome;
     final TextView preco;
+    final TextView qtd;
     final TextView departamento;
     final ImageView imagem;
     final CardView parentLayout;
@@ -29,6 +30,7 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements TextWatch
         this.carrinhoListener = carrinhoListener;
         nome = itemView.findViewById(R.id.nome_produto_item_historico);
         preco = itemView.findViewById(R.id.preco_produto_item_historico);
+        qtd = itemView.findViewById(R.id.qtd_destaque);
         departamento = itemView.findViewById(R.id.dep_produto_carrinho);
         imagem = itemView.findViewById(R.id.photo_produto_item_historico);
         parentLayout = itemView.findViewById(R.id.card_produto_historico);

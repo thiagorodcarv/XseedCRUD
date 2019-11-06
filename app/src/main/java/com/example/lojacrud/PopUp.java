@@ -30,7 +30,7 @@ public class PopUp extends AppCompatActivity {
     private Produtos produto;
     private ListDataModel pViewModel;
     private ProdutosDAO dao;
-    View layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class PopUp extends AppCompatActivity {
         produto = (Produtos) intent.getSerializableExtra("produto");
         pViewModel = ViewModelProviders.of(this).get(ListDataModel.class);
         dao = new ProdutosDAO(this);
-        layout =  findViewById(R.id.pop_up_back);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
@@ -81,7 +80,6 @@ public class PopUp extends AppCompatActivity {
                     }
                 }).create();
         dialog.show();
-        finish();
     }
 
     public void atualizar(View view){
