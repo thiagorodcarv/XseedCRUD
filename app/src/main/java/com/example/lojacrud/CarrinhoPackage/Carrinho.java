@@ -41,7 +41,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     private CarrinhoAdapter carrinhoAdapter;
     private TextView precoTotalView;
     private HistoricoDAO dao;
-    int positionMenu = -1;
+    private int positionMenu = -1;
 
 
     @Override
