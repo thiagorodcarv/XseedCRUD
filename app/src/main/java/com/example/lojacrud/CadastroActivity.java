@@ -104,6 +104,9 @@ public class CadastroActivity extends Activity {
             if(verificaString(produto.getNome())||verificaString(produto.getDepartamento())||verificaString(produto.getPreco())){
                 Toast.makeText(this, "Campo obrigatório não preenchido", Toast.LENGTH_SHORT).show();
             }
+            else if ((produto.getPrecoDesconto()!=null)&&(verificaDesconto(produto.getPreco(),produto.getPrecoDesconto()))){
+                Toast.makeText(this, "Valor de desconto deve ser menor que o de preço", Toast.LENGTH_SHORT).show();
+            }
             else {
                 long id = dao.inserirProduto(produto);
                 produto.setId((int) id);
@@ -118,6 +121,9 @@ public class CadastroActivity extends Activity {
             produto.setPrecoDesconto(precodesconto.getText().toString());
             if(verificaString(produto.getNome())||verificaString(produto.getDepartamento())||verificaString(produto.getPreco())){
                 Toast.makeText(this, "Campo obrigatório não preenchido", Toast.LENGTH_SHORT).show();
+            }
+            else if (verificaDesconto(produto.getPreco(),produto.getPrecoDesconto())){
+                Toast.makeText(this, "Valor de desconto deve ser menor que o de preço", Toast.LENGTH_SHORT).show();
             }
             else {
                 dao.atualizar(produto);
@@ -158,6 +164,16 @@ public class CadastroActivity extends Activity {
 
     public boolean verificaString(String s){
         if(s.trim().length()==0){
+            return true;
+        }
+        else return false;
+    }
+
+    public boolean verificaDesconto(String preco, String desconto){
+        if ((preco==null)||(desconto.equals(""))){
+            return false;
+        }
+        else if(Double.valueOf(preco)<Double.valueOf(desconto)){
             return true;
         }
         else return false;

@@ -1,17 +1,20 @@
 package com.example.lojacrud.CarrinhoPackage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.example.lojacrud.Produtos;
 import com.example.lojacrud.R;
@@ -46,7 +49,6 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
         CarrinhoHolder holder = (CarrinhoHolder) viewHolder;
         Produtos produto = produtos.get(position);
         holder.nome.setText(produto.getNome());
-        holder.departamento.setText(produto.getDepartamento());
         Double precoTotal;
         if ((produto.getPrecoDesconto()==null)||(produto.getPrecoDesconto().equals(""))){
             precoTotal = Double.valueOf(produto.getPreco());
@@ -74,7 +76,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
             holder.imagem.setImageDrawable(dr);
         }
 
-        holder.quantidadeProdutos.setText(produto.getQuantidade().toString());
+
     }
 
     @Override

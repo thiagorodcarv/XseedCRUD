@@ -39,6 +39,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewCarrinhoQTD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="25dp"
@@ -46,8 +47,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/photo_produto_item_historico">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@color/colorPrimary">
 
                     <TextView
@@ -55,15 +56,14 @@
                         android:layout_width="29dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="1"
                         android:textColor="#ffffff"
                         android:textSize="24sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    </TextView>
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -84,17 +84,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:text="Departamento:"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/photo_produto_item_historico"
-                app:layout_constraintTop_toBottomOf="@+id/nome_produto_item_historico" />
-
-            <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,19 +92,8 @@
                 android:layout_marginBottom="8dp"
                 android:text="Preço:"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/photo_produto_item_historico" />
-
-            <TextView
-                android:id="@+id/dep_produto_carrinho"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:text="dep"
-                app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/nome_produto_destaque"
-                app:layout_constraintTop_toTopOf="@+id/textView2" />
+                app:layout_constraintStart_toEndOf="@+id/photo_produto_item_historico"
+                app:layout_constraintTop_toBottomOf="@+id/nome_produto_item_historico" />
 
             <TextView
                 android:id="@+id/preco_produto_item_historico"
@@ -130,30 +108,6 @@
                 app:layout_constraintStart_toEndOf="@+id/textView3"
                 app:layout_constraintTop_toTopOf="@+id/textView3" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="Quantidade:"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
-                app:layout_constraintEnd_toStartOf="@+id/quantidadeProdutos"
-                app:layout_constraintTop_toBottomOf="@+id/nome_produto_item_historico" />
-
-            <EditText
-                android:id="@+id/quantidadeProdutos"
-                android:layout_width="47dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:ems="10"
-                android:inputType="number"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView" />
-
             <Button
                 android:id="@+id/deleteItemCarrinho"
                 android:layout_width="40dp"
@@ -162,8 +116,7 @@
                 android:layout_marginRight="8dp"
                 android:background="@android:drawable/ic_menu_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/quantidadeProdutos" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
