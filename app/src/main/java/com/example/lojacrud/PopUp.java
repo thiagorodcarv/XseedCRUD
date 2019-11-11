@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -60,7 +61,7 @@ public class PopUp extends AppCompatActivity {
             perfil.setImageBitmap(photoBitmap);
         }
 
-        getWindow().setLayout((int) (width*.8),(int)(height*.58));
+        getWindow().setLayout((int) (width*.8),(int)(height*.8));
 
     }
 
@@ -100,13 +101,15 @@ public class PopUp extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        produto = (Produtos) data.getSerializableExtra("result");
-        nome.setText(produto.getNome());
-        File photo;
-        photo = new File((getExternalFilesDir(filePath))+"/"+produto.getId());
-        if(photo.exists()){
-            Bitmap photoBitmap = BitmapFactory.decodeFile(photo.toString());
-            perfil.setImageBitmap(photoBitmap);
+        if (resultCode == Activity.RESULT_OK){
+            produto = (Produtos) data.getSerializableExtra("result");
+            nome.setText(produto.getNome());
+            File photo;
+            photo = new File((getExternalFilesDir(filePath))+"/"+produto.getId());
+            if(photo.exists()){
+                Bitmap photoBitmap = BitmapFactory.decodeFile(photo.toString());
+                perfil.setImageBitmap(photoBitmap);
+            }
         }
     }
 

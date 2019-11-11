@@ -82,7 +82,7 @@ public class CadastroActivity extends Activity {
         startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
 
-
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             photo = (Bitmap) data.getExtras().get("data");
