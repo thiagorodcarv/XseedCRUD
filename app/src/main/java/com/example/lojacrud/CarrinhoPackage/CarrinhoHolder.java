@@ -19,6 +19,7 @@ import com.example.lojacrud.R;
 public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.OnClickListener{
     final TextView nome;
     final TextView preco;
+    final TextView precoTotal;
     final TextView qtd;
     final ImageView imagem;
     final CardView parentLayout;
@@ -41,6 +42,7 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
             }
         });
         imagem = itemView.findViewById(R.id.photo_produto_item_historico);
+        precoTotal = itemView.findViewById(R.id.preco_total_carrinho_adapter);
         parentLayout = itemView.findViewById(R.id.card_produto_historico);
 //        quantidadeProdutos = itemView.findViewById(R.id.quantidadeProdutos);
         deleteItem = itemView.findViewById(R.id.deleteItemCarrinho);

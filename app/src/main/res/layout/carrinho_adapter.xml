@@ -41,8 +41,6 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
 
-
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewCarrinhoQTD"
                 android:layout_width="wrap_content"
@@ -123,6 +121,40 @@
                 android:background="@android:drawable/ic_menu_delete"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/photo_produto_item_historico"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <TextView
+                android:id="@+id/preco_total_carrinho_adapter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="precototal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Preço Total:"
+                app:layout_constraintBottom_toBottomOf="@+id/preco_total_carrinho_adapter"
+                app:layout_constraintEnd_toStartOf="@+id/preco_total_carrinho_adapter"
+                app:layout_constraintTop_toTopOf="@+id/preco_total_carrinho_adapter" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

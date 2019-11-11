@@ -57,6 +57,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
             precoTotal = Double.valueOf(produto.getPreco()) - Double.valueOf(produto.getPrecoDesconto());
         }
         holder.preco.setText(precoTotal.toString());
+        holder.precoTotal.setText(Double.toString(precoTotal*produto.getQuantidade()));
         holder.qtd.setText(produto.getQuantidade().toString());
         File photo;
         photo = new File((context.getExternalFilesDir(filePath))+"/"+produto.getId());

@@ -70,7 +70,6 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
 //                produtosCarrinho.get(position).setQuantidade(0);
 //                setPrecoTotalView();
 //                carrinhoAdapter.notifyDataSetChanged();
-//                //TODO: MUDAR FORMA COMO QUANTIDADE É INCREMENTADA
 //            }
 //            else {
 //                precoTotal = 0.0;

@@ -37,6 +37,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:background="@android:drawable/sym_action_email"
+        android:ellipsize="none"
+        android:focusableInTouchMode="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 </androidx.constraintlayout.widget.ConstraintLayout>
