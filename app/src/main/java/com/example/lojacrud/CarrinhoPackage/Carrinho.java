@@ -42,7 +42,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     private TextView precoTotalView;
     private HistoricoDAO dao;
     private int positionMenu = -1;
-
+//TODO: implementar delete no carrinho
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +119,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     }
 
     public void realizarCompra(View view) {
-        if (produtosCarrinho.size()==0 || precoTotalView.getText().equals("0.0")) {
+        if (produtosCarrinho.size()==0 || precoTotalView.getText().equals("0.00")) {
             Toast.makeText(this, "Não há nenhum item no carrinho", Toast.LENGTH_SHORT).show();
         }
         else{

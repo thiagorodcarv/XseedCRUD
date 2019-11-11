@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,8 +45,6 @@ public class PopUp extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
-
 
         nome = findViewById(R.id.pop_nome_produto);
         perfil = findViewById(R.id.photo_produto_popup);
@@ -61,7 +60,12 @@ public class PopUp extends AppCompatActivity {
             perfil.setImageBitmap(photoBitmap);
         }
 
-        getWindow().setLayout((int) (width*.8),(int)(height*.8));
+
+        getWindow().setLayout((int) (width*.8),WindowManager.LayoutParams.WRAP_CONTENT);
+
+
+//        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_ATTACHED_IN_DECOR);
+
 
     }
 

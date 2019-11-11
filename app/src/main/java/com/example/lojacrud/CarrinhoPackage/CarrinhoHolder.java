@@ -5,6 +5,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -26,6 +27,7 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
 //    final EditText quantidadeProdutos;
     final Button deleteItem;
     final CardView cardView;
+    final CheckBox checkBox;
     CarrinhoListener carrinhoListener;
 
     public CarrinhoHolder(@NonNull final View itemView, final CarrinhoListener carrinhoListener) {
@@ -35,6 +37,7 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
         preco = itemView.findViewById(R.id.preco_produto_item_historico);
         cardView = itemView.findViewById(R.id.cardViewCarrinhoQTD);
         qtd = itemView.findViewById(R.id.qtd_destaque);
+        checkBox = itemView.findViewById(R.id.checkBox_carrinho);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

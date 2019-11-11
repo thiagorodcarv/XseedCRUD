@@ -59,7 +59,7 @@ public class ProdutosAdapter extends RecyclerView.Adapter {
             holder.checkBox.setChecked(false);
         }
         holder.nome.setText(produto.getNome());
-        holder.departamento.setText(produto.getDepartamento());
+//        holder.departamento.setText(produto.getDepartamento());
         holder.preco.setText(produto.getPreco());
         File photo;
         photo = new File((context.getExternalFilesDir(filePath))+"/"+produto.getId());

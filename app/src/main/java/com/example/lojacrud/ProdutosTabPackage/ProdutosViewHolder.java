@@ -16,7 +16,7 @@ import com.example.lojacrud.R;
 public class ProdutosViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, ImageView.OnClickListener{
     final TextView nome;
     final TextView preco;
-    final TextView departamento;
+//    final TextView departamento;
     final ImageView imagem;
     final CardView parentLayout;
     final CheckBox checkBox;
@@ -27,7 +27,7 @@ public class ProdutosViewHolder extends RecyclerView.ViewHolder implements Compo
         this.clickOnItems = clickOnItems;
         nome = itemView.findViewById(R.id.nome_produto_destaque);
         preco = itemView.findViewById(R.id.preco_produto_destaque);
-        departamento = itemView.findViewById(R.id.dep_produto_destaque);
+//        departamento = itemView.findViewById(R.id.dep_produto_destaque);
         imagem = itemView.findViewById(R.id.photo_produto_destaque);
         parentLayout = itemView.findViewById(R.id.card_produto);
         checkBox = itemView.findViewById(R.id.checkBox_destaque);

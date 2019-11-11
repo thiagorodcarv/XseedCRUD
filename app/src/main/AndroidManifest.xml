@@ -19,7 +19,8 @@
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".PopUp"
-            android:theme="@style/AppTheme.CustomTheme" />
+            android:theme="@style/AppTheme.CustomTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity android:name=".CadastroActivity"
             android:configChanges="orientation"/>
         <activity android:name=".MainActivity"

@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -26,8 +27,8 @@ public class ImagemDetalhesPopUp extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
+//        int width = displayMetrics.widthPixels;
+//        int height = displayMetrics.heightPixels;
 
         File photo;
         photo = new File((getExternalFilesDir(filePath))+"/"+id);
@@ -38,8 +39,8 @@ public class ImagemDetalhesPopUp extends AppCompatActivity {
             //roundedBitmapDrawable.setTargetDensity(photo.getDensity());
             imageView.setImageBitmap(photoBitmap);
         }
-
-        getWindow().setLayout((int) (width*.8),(int)(height*.6));
+        imageView.setAdjustViewBounds(true);
+        getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
     @Override
