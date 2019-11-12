@@ -17,7 +17,7 @@ public class ProdutosDestaqueViewHolder extends RecyclerView.ViewHolder implemen
     final TextView nome;
     final TextView preco;
     final TextView precoDesconto;
-    final TextView departamento;
+//    final TextView departamento;
     final ImageView imagem;
     final CardView parentLayout;
     CheckBox checkBox;
@@ -29,7 +29,7 @@ public class ProdutosDestaqueViewHolder extends RecyclerView.ViewHolder implemen
         nome = itemView.findViewById(R.id.nome_produto_destaque);
         preco = itemView.findViewById(R.id.preco_produto_destaque);
         precoDesconto = itemView.findViewById(R.id.preco_produto_destaque_desconto);
-        departamento = itemView.findViewById(R.id.dep_produto_destaque);
+//        departamento = itemView.findViewById(R.id.dep_produto_destaque);
         imagem = itemView.findViewById(R.id.photo_produto_destaque);
         parentLayout = itemView.findViewById(R.id.card_produto_destaque);
         checkBox = itemView.findViewById(R.id.checkBox_destaque);

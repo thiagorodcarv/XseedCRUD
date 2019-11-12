@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -17,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lojacrud.R;
 
-public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.OnClickListener{
+public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.OnClickListener, CheckBox.OnCheckedChangeListener, CardView.OnLongClickListener{
     final TextView nome;
     final TextView preco;
     final TextView precoTotal;
@@ -34,10 +35,12 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
         super(itemView);
         this.carrinhoListener = carrinhoListener;
         nome = itemView.findViewById(R.id.nome_produto_item_historico);
+        nome.setOnLongClickListener(this);
         preco = itemView.findViewById(R.id.preco_produto_item_historico);
         cardView = itemView.findViewById(R.id.cardViewCarrinhoQTD);
         qtd = itemView.findViewById(R.id.qtd_destaque);
         checkBox = itemView.findViewById(R.id.checkBox_carrinho);
+        checkBox.setOnCheckedChangeListener(this);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +50,7 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
         imagem = itemView.findViewById(R.id.photo_produto_item_historico);
         precoTotal = itemView.findViewById(R.id.preco_total_carrinho_adapter);
         parentLayout = itemView.findViewById(R.id.card_produto_historico);
+        parentLayout.setOnLongClickListener(this);
 //        quantidadeProdutos = itemView.findViewById(R.id.quantidadeProdutos);
         deleteItem = itemView.findViewById(R.id.deleteItemCarrinho);
         deleteItem.setOnClickListener(this);
@@ -73,4 +77,15 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
         carrinhoListener.deleteItem(getAdapterPosition());
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        carrinhoListener.onCheckListener(getAdapterPosition(),isChecked);
+    }
+
+
+    @Override
+    public boolean onLongClick(View v) {
+        carrinhoListener.onCheckListener(getAdapterPosition(),true);
+        return true;
+    }
 }

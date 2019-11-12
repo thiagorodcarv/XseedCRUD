@@ -29,11 +29,13 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<Produtos> produtos;
     private CarrinhoListener carrinhoListener;
+    private Boolean teste;
 
-    public CarrinhoAdapter(Context context, List<Produtos> produtos, CarrinhoListener carrinhoListener) {
+    public CarrinhoAdapter(Context context, List<Produtos> produtos, CarrinhoListener carrinhoListener, Boolean teste) {
         this.context = context;
         this.produtos = produtos;
         this.carrinhoListener = carrinhoListener;
+        this.teste = teste;
     }
 
     @NonNull
@@ -49,6 +51,17 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
         CarrinhoHolder holder = (CarrinhoHolder) viewHolder;
         Produtos produto = produtos.get(position);
         holder.nome.setText(produto.getNome());
+        if (produto.getChecked()){
+            holder.checkBox.setChecked(true);
+        }
+        if (teste){
+            holder.deleteItem.setVisibility(View.GONE);
+            holder.checkBox.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.checkBox.setVisibility(View.GONE);
+            holder.deleteItem.setVisibility(View.VISIBLE);
+        }
         Double precoTotal;
         if ((produto.getPrecoDesconto()==null)||(produto.getPrecoDesconto().equals(""))){
             precoTotal = Double.valueOf(produto.getPreco());

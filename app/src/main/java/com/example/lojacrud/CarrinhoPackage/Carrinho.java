@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +43,9 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     private TextView precoTotalView;
     private HistoricoDAO dao;
     private int positionMenu = -1;
-//TODO: implementar delete no carrinho
+    private Boolean teste = false;
+    private List<Produtos> produtosDelete = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         dao = new HistoricoDAO(this);
         Intent intent = getIntent();
         produtosCarrinho = (List<Produtos>) intent.getSerializableExtra("produtosSelecionados");
-        carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this);
+        carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, teste);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(carrinhoAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -83,6 +86,14 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
 //
 //    }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_carrinho,menu);
+        return true;
+    }
+
     @Override
     public void deleteItem(int position) {
         produtosCarrinho.remove(produtosCarrinho.get(position));
@@ -102,6 +113,56 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         inflater.inflate(R.menu.pop_up_qtd,popupMenu.getMenu());
         popupMenu.show();
     }
+
+    @Override
+    public void onCheckListener(int position, boolean isChecked) {
+        if (!isChecked){
+            produtosDelete.remove(produtosCarrinho.get(position));
+            //Toast.makeText(getActivity(), produtosView.get(position).getNome()+" Removido", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+            if (!teste){
+                teste = true;
+                produtosCarrinho.get(position).setChecked(true);
+                carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, teste);
+                recyclerView.setAdapter(carrinhoAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            }
+            if(!(produtosDelete.contains(produtosCarrinho.get(position)))){
+                produtosDelete.add(produtosCarrinho.get(position));
+//                Toast.makeText(this, produtosCarrinho.get(position).getNome()+" Adicionado", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+
+    public void abrircheckboxes(MenuItem menuItem){
+        teste = !teste;
+        if(!teste){
+//            AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Atenção")
+//                    .setMessage("Deseja excluir os produtos do carrinho?")
+//                    .setNegativeButton("NÃO",null)
+//                    .setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialogInterface, int i) {
+//                            produtosCarrinho.removeAll(produtosDelete);
+//                        }
+//                    }).create();
+//            dialog.show(); //TODO: consertar isso aqui
+
+//            produtosCarrinho.removeAll(produtosDelete);
+//            setPrecoTotalView();
+        }
+        carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, teste);
+        recyclerView.setAdapter(carrinhoAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void excluirItems(MenuItem menuItem){
+        Toast.makeText(this, "aaaaaaaaaaaaaaa", Toast.LENGTH_SHORT).show();
+    }
+
 
     public void setPrecoTotalView() {
         Double precoDescontado;

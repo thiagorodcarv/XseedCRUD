@@ -15,6 +15,7 @@
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".DetalhesActivity" />
         <activity android:name=".CarrinhoPackage.Carrinho"
+            android:configChanges="orientation"
             android:theme="@style/AppTheme.CustomTheme.Carrinho"
             android:parentActivityName=".MainActivity"/>
         <activity

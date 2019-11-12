@@ -59,7 +59,7 @@ public class ProdutosDestaquesAdapter extends RecyclerView.Adapter {
             holder.checkBox.setChecked(false);
         }
         holder.nome.setText(produto.getNome());
-        holder.departamento.setText(produto.getDepartamento());
+//        holder.departamento.setText(produto.getDepartamento());
         holder.preco.setText(produto.getPreco());
         Double precoAtual = (Double.valueOf(produto.getPreco()) - Double.valueOf(produto.getPrecoDesconto()));
         holder.precoDesconto.setText(precoAtual.toString());
