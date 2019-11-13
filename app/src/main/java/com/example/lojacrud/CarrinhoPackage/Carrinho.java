@@ -26,6 +26,7 @@ import com.example.lojacrud.BottomSendPopUp;
 
 import com.example.lojacrud.Produtos;
 import com.example.lojacrud.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -43,6 +44,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     private HistoricoDAO dao;
     private FrameLayout frameLayout;
     private MenuItem deleteMenu;
+    private FloatingActionButton fab;
     private ImageView imagePlaceHolder;
     private int positionMenu = -1;
     private Boolean checkBoxEnabler = false;
@@ -57,6 +59,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         precoTotalView = findViewById(R.id.precoTotal);
         recyclerView = findViewById(R.id.lista_carrinhos);
+        fab = findViewById(R.id.floatingActionButtonCarrinho);
         frameLayout = findViewById(R.id.frameLayout);
         imagePlaceHolder = findViewById(R.id.imagePlaceHolderCarrinho);
         dao = new HistoricoDAO(this);
@@ -281,13 +284,15 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         if(produtos.size() > 0){
             recyclerView.setVisibility(View.VISIBLE);
             imagePlaceHolder.setVisibility(View.GONE);
-//            frameLayout.setVisibility(View.VISIBLE);
+            fab.show();
+            frameLayout.setVisibility(View.VISIBLE);
 //            deleteMenu.setVisible(true);
         }
         else {
+            fab.hide();
             recyclerView.setVisibility(View.GONE);
             imagePlaceHolder.setVisibility(View.VISIBLE);
-//            frameLayout.setVisibility(View.GONE);
+            frameLayout.setVisibility(View.GONE);
 //            deleteMenu.setVisible(false);
         }
     }
