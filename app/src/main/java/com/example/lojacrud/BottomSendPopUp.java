@@ -42,12 +42,12 @@ public class BottomSendPopUp extends BottomSheetDialogFragment {
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long numeroDeItensComprados = inserirCompras(dao,produtosCarrinho);
-                Toast.makeText(getActivity(), numeroDeItensComprados+" itens comprados", Toast.LENGTH_SHORT).show();
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto", "loja@xseed.com", null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Pedido");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, conteudo);
+                long numeroDeItensComprados = inserirCompras(dao,produtosCarrinho);
+                Toast.makeText(getActivity(), numeroDeItensComprados+" itens comprados", Toast.LENGTH_SHORT).show();
                 startActivity(Intent.createChooser(emailIntent, "Enviando pedido..."));
                 getActivity().finish();
             }
@@ -55,16 +55,19 @@ public class BottomSendPopUp extends BottomSheetDialogFragment {
         whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PackageManager pm = getActivity().getPackageManager(); //TODO
+                PackageManager pm = getActivity().getPackageManager(); //TODO COLOCAR AS MENSAGENS RECEBIDAS NA MAIN ACTIVITY
                 try {
-                    long numeroDeItensComprados = inserirCompras(dao,produtosCarrinho);
-                    Toast.makeText(getActivity(), numeroDeItensComprados+" itens comprados", Toast.LENGTH_SHORT).show();
+
+
                     Intent waIntent = new Intent(Intent.ACTION_SEND);
                     waIntent.setType("text/plain");
                     PackageInfo info= pm.getPackageInfo("com.whatsapp", PackageManager.GET_META_DATA);
-                    waIntent.setPackage("com.whatsapp");
+                    waIntent.setPackage("com.whatsapp");  //TIRANDO O PACKAGE ELE ABRE AS OPÇÕES PARA ENVIO INSTALADAS NO CELULAR
                     waIntent.putExtra(Intent.EXTRA_TEXT, conteudo);
+                    long numeroDeItensComprados = inserirCompras(dao,produtosCarrinho);
+                    Toast.makeText(getActivity(), numeroDeItensComprados+" itens comprados", Toast.LENGTH_SHORT).show();
                     startActivity(Intent.createChooser(waIntent, "Share with"));
+
                 } catch (PackageManager.NameNotFoundException e) {
                     Toast.makeText(getActivity(), "WhatsApp not Installed", Toast.LENGTH_SHORT)
                             .show();

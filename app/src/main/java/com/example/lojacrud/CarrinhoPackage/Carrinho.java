@@ -1,23 +1,22 @@
 package com.example.lojacrud.CarrinhoPackage;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,9 +41,13 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     private CarrinhoAdapter carrinhoAdapter;
     private TextView precoTotalView;
     private HistoricoDAO dao;
+    private FrameLayout frameLayout;
+    private MenuItem deleteMenu;
+    private ImageView imagePlaceHolder;
     private int positionMenu = -1;
-    private Boolean teste = false;
+    private Boolean checkBoxEnabler = false;
     private List<Produtos> produtosDelete = new ArrayList<>();
+
 
 
     @Override
@@ -54,10 +57,13 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         precoTotalView = findViewById(R.id.precoTotal);
         recyclerView = findViewById(R.id.lista_carrinhos);
+        frameLayout = findViewById(R.id.frameLayout);
+        imagePlaceHolder = findViewById(R.id.imagePlaceHolderCarrinho);
         dao = new HistoricoDAO(this);
         Intent intent = getIntent();
         produtosCarrinho = (List<Produtos>) intent.getSerializableExtra("produtosSelecionados");
-        carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, teste);
+        setImageHolder(produtosCarrinho);
+        carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, checkBoxEnabler);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(carrinhoAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -91,16 +97,16 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_carrinho,menu);
+        deleteMenu = menu.findItem(R.id.delete_menu_carrinho);
         return true;
     }
+
 
     @Override
     public void deleteItem(int position) {
         produtosCarrinho.remove(produtosCarrinho.get(position));
-        if (produtosCarrinho.size()==0){
-            precoTotalView.setText("0");
-        }
         carrinhoAdapter.notifyDataSetChanged();
+        setImageHolder(produtosCarrinho);
         setPrecoTotalView();
     }
 
@@ -118,18 +124,18 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     public void onCheckListener(int position, boolean isChecked) {
         if (!isChecked){
             produtosDelete.remove(produtosCarrinho.get(position));
+            produtosCarrinho.get(position).setChecked(false);
             //Toast.makeText(getActivity(), produtosView.get(position).getNome()+" Removido", Toast.LENGTH_SHORT).show();
 
         }
         else {
-            if (!teste){
-                teste = true;
-                produtosCarrinho.get(position).setChecked(true);
-                carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, teste);
-                recyclerView.setAdapter(carrinhoAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            if (!checkBoxEnabler){
+                checkBoxEnabler = true;
+                //deleteMenu.setVisible(true);
+                carrinhoAdapter.changeMode(checkBoxEnabler);
             }
             if(!(produtosDelete.contains(produtosCarrinho.get(position)))){
+                produtosCarrinho.get(position).setChecked(true);
                 produtosDelete.add(produtosCarrinho.get(position));
 //                Toast.makeText(this, produtosCarrinho.get(position).getNome()+" Adicionado", Toast.LENGTH_SHORT).show();
             }
@@ -137,32 +143,29 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         }
     }
 
-    public void abrircheckboxes(MenuItem menuItem){
-        teste = !teste;
-        if(!teste){
-//            AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Atenção")
-//                    .setMessage("Deseja excluir os produtos do carrinho?")
-//                    .setNegativeButton("NÃO",null)
-//                    .setPositiveButton("SIM", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            produtosCarrinho.removeAll(produtosDelete);
-//                        }
-//                    }).create();
-//            dialog.show(); //TODO: consertar isso aqui
-
-//            produtosCarrinho.removeAll(produtosDelete);
-//            setPrecoTotalView();
+    public void abrircheckboxes(final MenuItem menuItem){
+        if(checkBoxEnabler && (produtosDelete.size()>0)){
+            AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Atenção")
+                    .setMessage("Deseja excluir os produtos do carrinho?")
+                    .setNegativeButton("NÃO",null)
+                    .setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            produtosCarrinho.removeAll(produtosDelete);
+                            produtosDelete.clear();
+                            carrinhoAdapter.changeMode(checkBoxEnabler);
+                            setImageHolder(produtosCarrinho);
+                            setPrecoTotalView();
+                        }
+                    }).create();
+            dialog.show();
         }
-        carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, teste);
-        recyclerView.setAdapter(carrinhoAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        else {
+            //deleteMenu.setVisible(true);
+            carrinhoAdapter.changeMode(!checkBoxEnabler);
+        }
+        checkBoxEnabler = !checkBoxEnabler;
     }
-
-    public void excluirItems(MenuItem menuItem){
-        Toast.makeText(this, "aaaaaaaaaaaaaaa", Toast.LENGTH_SHORT).show();
-    }
-
 
     public void setPrecoTotalView() {
         Double precoDescontado;
@@ -218,10 +221,8 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             produtosCarrinho.remove(viewHolder.getAdapterPosition());
-            if (produtosCarrinho.size()==0){
-                precoTotalView.setText("0");
-            }
             carrinhoAdapter.notifyDataSetChanged();
+            setImageHolder(produtosCarrinho);
             setPrecoTotalView();
         }
     };
@@ -274,5 +275,20 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         produtosCarrinho.get(position).setQuantidade(qtd);
         setPrecoTotalView();
         adapter.notifyDataSetChanged();
+    }
+
+    public void setImageHolder(List<Produtos> produtos){
+        if(produtos.size() > 0){
+            recyclerView.setVisibility(View.VISIBLE);
+            imagePlaceHolder.setVisibility(View.GONE);
+//            frameLayout.setVisibility(View.VISIBLE);
+//            deleteMenu.setVisible(true);
+        }
+        else {
+            recyclerView.setVisibility(View.GONE);
+            imagePlaceHolder.setVisibility(View.VISIBLE);
+//            frameLayout.setVisibility(View.GONE);
+//            deleteMenu.setVisible(false);
+        }
     }
 }

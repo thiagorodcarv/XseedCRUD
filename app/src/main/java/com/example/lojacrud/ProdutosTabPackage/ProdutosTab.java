@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.lojacrud.Auxiliar;
@@ -34,6 +35,7 @@ public class ProdutosTab extends Fragment implements Auxiliar, ClickOnItems {
     private List<Produtos> produtosSD = new ArrayList<>();
     private List<Produtos> produtos;
     private RecyclerView recyclerView;
+    private ImageView imagePlaceHolder;
     private Map<Integer, Boolean> mapaChecks;
     private ProdutosAdapter adapter;
     private ListDataModel pViewModel;
@@ -52,6 +54,7 @@ public class ProdutosTab extends Fragment implements Auxiliar, ClickOnItems {
         pViewModel = ViewModelProviders.of(getActivity()).get(ListDataModel.class);
 //        dao = new ProdutosDAO(getActivity());
 //        produtos = dao.recuperarProdutos();
+        imagePlaceHolder = rootView.findViewById(R.id.imagePlaceHolderProdutos);
         produtos = pViewModel.produtosBanco;
         for (Produtos p : produtos){
             if((p.getPrecoDesconto().equals(""))){
@@ -59,6 +62,7 @@ public class ProdutosTab extends Fragment implements Auxiliar, ClickOnItems {
             }
         }
         produtosView.addAll(produtosSD);
+        setImageHolder(produtosView);
         adapter = new ProdutosAdapter(getActivity(),produtosView,this,pViewModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -84,6 +88,7 @@ public class ProdutosTab extends Fragment implements Auxiliar, ClickOnItems {
             }
         }
         adapter.notifyDataSetChanged();
+        setImageHolder(produtosView);
     }
 
     @Override
@@ -99,6 +104,7 @@ public class ProdutosTab extends Fragment implements Auxiliar, ClickOnItems {
         }
         produtosView.addAll(produtosSD);
         adapter.notifyDataSetChanged();
+        setImageHolder(produtosView);
     }
 
     @Override
@@ -131,23 +137,26 @@ public class ProdutosTab extends Fragment implements Auxiliar, ClickOnItems {
         adapter.notifyDataSetChanged();
     }
 
-    public boolean containsId(Produtos produto, List<Produtos> produtos){
-        if (produtos.size()>0){
-            for (Produtos p : produtos) {
-                if (p.getId() == produto.getId()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-//    public void setBooleanToId(Produtos produto, List<Produtos> produtos, Boolean b){
-//        for (Produtos p : produtos) {
-//            if (p.getId() == produto.getId()) {
-//                p.setChecked(b);
+//    public boolean containsId(Produtos produto, List<Produtos> produtos){
+//        if (produtos.size()>0){
+//            for (Produtos p : produtos) {
+//                if (p.getId() == produto.getId()) {
+//                    return true;
+//                }
 //            }
 //        }
+//        return false;
 //    }
+
+    public void setImageHolder(List<Produtos> produtos){
+        if(produtos.size() > 0){
+            recyclerView.setVisibility(View.VISIBLE);
+            imagePlaceHolder.setVisibility(View.GONE);
+        }
+        else {
+            recyclerView.setVisibility(View.GONE);
+            imagePlaceHolder.setVisibility(View.VISIBLE);
+        }
+    }
 
 }

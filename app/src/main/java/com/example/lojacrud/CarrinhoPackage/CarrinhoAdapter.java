@@ -1,14 +1,12 @@
 package com.example.lojacrud.CarrinhoPackage;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
@@ -29,13 +27,14 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<Produtos> produtos;
     private CarrinhoListener carrinhoListener;
-    private Boolean teste;
+    private Boolean checkBoxEnabler;
 
-    public CarrinhoAdapter(Context context, List<Produtos> produtos, CarrinhoListener carrinhoListener, Boolean teste) {
+
+    public CarrinhoAdapter(Context context, List<Produtos> produtos, CarrinhoListener carrinhoListener, Boolean checkBoxEnabler) {
         this.context = context;
         this.produtos = produtos;
         this.carrinhoListener = carrinhoListener;
-        this.teste = teste;
+        this.checkBoxEnabler = checkBoxEnabler;
     }
 
     @NonNull
@@ -51,10 +50,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
         CarrinhoHolder holder = (CarrinhoHolder) viewHolder;
         Produtos produto = produtos.get(position);
         holder.nome.setText(produto.getNome());
-        if (produto.getChecked()){
-            holder.checkBox.setChecked(true);
-        }
-        if (teste){
+        if (checkBoxEnabler){
             holder.deleteItem.setVisibility(View.GONE);
             holder.checkBox.setVisibility(View.VISIBLE);
         }
@@ -62,6 +58,13 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
             holder.checkBox.setVisibility(View.GONE);
             holder.deleteItem.setVisibility(View.VISIBLE);
         }
+        if (produto.getChecked()==true){
+            holder.checkBox.setChecked(true);
+        }
+        else {
+            holder.checkBox.setChecked(false);
+        }
+
         Double precoTotal;
         if ((produto.getPrecoDesconto()==null)||(produto.getPrecoDesconto().equals(""))){
             precoTotal = Double.valueOf(produto.getPreco());
@@ -89,8 +92,11 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
             dr.setCornerRadius(Math.max(src.getWidth(), src.getHeight()) / 2.0f);
             holder.imagem.setImageDrawable(dr);
         }
+    }
 
-
+    public void changeMode(Boolean b){
+        checkBoxEnabler = b;
+        notifyDataSetChanged();
     }
 
     @Override

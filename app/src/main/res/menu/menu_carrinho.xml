@@ -6,6 +6,7 @@
         android:id="@+id/delete_menu_carrinho"
         android:icon="@android:drawable/ic_menu_delete"
         android:title="delete"
+        android:visible="true"
         android:onClick="abrircheckboxes"
         app:showAsAction="always" />
 

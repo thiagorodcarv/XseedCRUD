@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.lojacrud.Auxiliar;
@@ -34,7 +35,7 @@ public class DestaquesTab extends Fragment implements Auxiliar, ClickOnItems {
     private List<Produtos> produtos;
     private List<Produtos> produtosDestaque = new ArrayList<>();
     private RecyclerView recyclerView;
- //   private ProdutosDAO dao;
+    private ImageView imagePlaceHolder;
     private ProdutosDestaquesAdapter adapter;
     private ListDataModel pViewModel;
     private Map<Integer, Boolean> mapaChecks;
@@ -49,6 +50,7 @@ public class DestaquesTab extends Fragment implements Auxiliar, ClickOnItems {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_destaques_tab, container, false);
         recyclerView = rootView.findViewById(R.id.lista_produtos_destaques);
+        imagePlaceHolder = rootView.findViewById(R.id.imagePlaceHolderDestaques);
         pViewModel = ViewModelProviders.of(getActivity()).get(ListDataModel.class);
 //        dao = new ProdutosDAO(getActivity());
 //        produtos = dao.recuperarProdutos();
@@ -59,6 +61,7 @@ public class DestaquesTab extends Fragment implements Auxiliar, ClickOnItems {
             }
         }
         produtosView.addAll(produtosDestaque);
+        setImageHolder(produtosView);
         adapter = new ProdutosDestaquesAdapter(getActivity(),produtosView,this,pViewModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -158,12 +161,15 @@ public class DestaquesTab extends Fragment implements Auxiliar, ClickOnItems {
 
 
 
-//    public void setBooleanToId(Produtos produto, List<Produtos> produtos, Boolean b){
-//        for (Produtos p : produtos) {
-//            if (p.getId() == produto.getId()) {
-//                p.setChecked(b);
-//            }
-//        }
-//    }
+    public void setImageHolder(List<Produtos> produtos){
+        if(produtos.size() > 0){
+            recyclerView.setVisibility(View.VISIBLE);
+            imagePlaceHolder.setVisibility(View.GONE);
+        }
+        else {
+            recyclerView.setVisibility(View.GONE);
+            imagePlaceHolder.setVisibility(View.VISIBLE);
+        }
+    }
 
 }
