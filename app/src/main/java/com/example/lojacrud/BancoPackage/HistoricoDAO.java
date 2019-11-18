@@ -46,6 +46,7 @@ public class HistoricoDAO {
             p.setQuantidade(cursor.getInt(3));
             produtos.add(p);
         }
+
         return produtos;
     }
 
