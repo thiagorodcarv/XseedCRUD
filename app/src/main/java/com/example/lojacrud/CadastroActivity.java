@@ -1,5 +1,6 @@
 package com.example.lojacrud;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
@@ -19,11 +20,13 @@ import com.example.lojacrud.BancoPackage.ProdutosDAO;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 
 import static com.example.lojacrud.R.*;
 
 public class CadastroActivity extends Activity {
     private static final int CAMERA_REQUEST = 1888;
+    private static final int READ_FILE_REQUEST = 42;
     private EditText nome;
     private EditText preco;
     private EditText departamento;
@@ -82,10 +85,27 @@ public class CadastroActivity extends Activity {
         startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
 
+    public void selecionarDeDiretorio(View view){
+        Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, READ_FILE_REQUEST);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             photo = (Bitmap) data.getExtras().get("data");
+        }
+        else if (requestCode == READ_FILE_REQUEST && resultCode == RESULT_OK){
+            try{
+                InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                photo = BitmapFactory.decodeStream(inputStream);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        if (photo!=null){
             Bitmap photoAux = Bitmap.createScaledBitmap(photo,photo.getWidth(),photo.getWidth(),false);
             RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), photoAux);
             roundedBitmapDrawable.setCircular(true);
