@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lojacrud.BancoPackage.HistoricoDAO;
+import com.example.lojacrud.BancoPackage.ProdutosDAO;
 import com.example.lojacrud.BottomSendPopUp;
 
 import com.example.lojacrud.Produtos;
@@ -36,12 +37,14 @@ import java.util.List;
 public class Carrinho extends AppCompatActivity implements CarrinhoListener, PopupMenu.OnMenuItemClickListener {
 
     private List<Produtos> produtosCarrinho = new ArrayList<>();
+    private List<Produtos> produtosCarrinhoIntent = new ArrayList<>();
     private List<Produtos> produtosCarrinhoView = new ArrayList<>();
     private Double precoTotal = 0.0;
     private RecyclerView recyclerView;
     private CarrinhoAdapter carrinhoAdapter;
     private TextView precoTotalView;
-    private HistoricoDAO dao;
+    private HistoricoDAO historicoDAO;
+    private ProdutosDAO produtosDAO;
     private FrameLayout frameLayout;
     private MenuItem deleteMenu;
     private FloatingActionButton fab;
@@ -62,9 +65,14 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         fab = findViewById(R.id.floatingActionButtonCarrinho);
         frameLayout = findViewById(R.id.frameLayout);
         imagePlaceHolder = findViewById(R.id.imagePlaceHolderCarrinho);
-        dao = new HistoricoDAO(this);
+        historicoDAO = new HistoricoDAO(this);
+        produtosDAO = new ProdutosDAO(this);
         Intent intent = getIntent();
-        produtosCarrinho = (List<Produtos>) intent.getSerializableExtra("produtosSelecionados");
+        produtosCarrinhoIntent = (List<Produtos>) intent.getSerializableExtra("produtosSelecionados");
+        for (Produtos produtos : produtosCarrinhoIntent){
+            produtos = produtosDAO.selectProduto(produtos);
+            produtosCarrinho.add(produtos);
+        }
         setImageHolder(produtosCarrinho);
         carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, checkBoxEnabler);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
@@ -190,7 +198,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
             Toast.makeText(this, "Não há nenhum item no carrinho", Toast.LENGTH_SHORT).show();
         }
         else{
-            BottomSendPopUp bottomSendPopUp = new BottomSendPopUp(dao,produtosCarrinho,gerarPedido(produtosCarrinho));
+            BottomSendPopUp bottomSendPopUp = new BottomSendPopUp(historicoDAO,produtosCarrinho,gerarPedido(produtosCarrinho));
             bottomSendPopUp.show(getSupportFragmentManager(),"example");
         }
     }

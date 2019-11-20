@@ -58,5 +58,19 @@ public class ProdutosDAO {
     }
 
 
+    public Produtos selectProduto(Produtos produto){
+        Produtos p = new Produtos();
+        Cursor cursor = banco.rawQuery("SELECT id,nome,preco,precodesconto,departamento FROM " +
+                "produtos WHERE id = ?",new String[]{produto.getId().toString()});
+        cursor.moveToFirst();
+        p.setId(cursor.getInt(0));
+        p.setNome(cursor.getString(1));
+        p.setPreco(cursor.getString(2));
+        p.setPrecoDesconto(cursor.getString(3));
+        p.setDepartamento(cursor.getString(4));
+        return p;
+    }
+
+
 }
 
