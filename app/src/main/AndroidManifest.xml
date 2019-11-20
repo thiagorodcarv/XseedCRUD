@@ -9,14 +9,16 @@
         android:roundIcon="@mipmap/storeicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ItemHistoricoPackage.ItemHistoricoActivity"></activity>
+        <activity android:name=".ItemHistoricoPackage.ItemHistoricoActivity"
+            android:theme="@style/AppTheme.CustomTheme.Padrao"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".ImagemDetalhesPopUp"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".DetalhesActivity" />
         <activity android:name=".CarrinhoPackage.Carrinho"
             android:configChanges="orientation"
-            android:theme="@style/AppTheme.CustomTheme.Carrinho"
+            android:theme="@style/AppTheme.CustomTheme.Padrao"
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".PopUp"

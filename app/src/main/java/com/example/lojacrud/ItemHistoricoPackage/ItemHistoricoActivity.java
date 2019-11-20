@@ -32,6 +32,7 @@ public class ItemHistoricoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_historico);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = findViewById(R.id.lista_item_historico);
         Intent intent = getIntent();
         dataCompra = intent.getStringExtra("data");
@@ -42,6 +43,7 @@ public class ItemHistoricoActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.notifyDataSetChanged();
+
     }
 
     public List<Produtos> recuperaItensPorData(List<Produtos> produtos, String data){
