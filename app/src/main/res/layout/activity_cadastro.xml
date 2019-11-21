@@ -40,6 +40,7 @@
 
 
 
+
                 <ImageView
                     android:id="@+id/imgFundo"
                     android:layout_width="246dp"
@@ -52,31 +53,42 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
-                <EditText
-                    android:id="@+id/txt_Nome"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:hint="Nome*"
-                    android:inputType="textPersonName"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgFundo" />
+                    app:layout_constraintTop_toBottomOf="@+id/imgFundo">
 
-                <EditText
-                    android:id="@+id/txt_Preco"
-                    android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_Nome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Nome*"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:hint="Preço*"
-                    android:inputType="number|numberDecimal"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_Departamento" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/txt_Departamento">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_Preco"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:ems="10"
+                        android:hint="Preço*"
+                        android:inputType="number|numberDecimal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+<!--                CONTINUAR ISSO AQUI  -->
                 <EditText
                     android:id="@+id/txt_Desconto"
                     android:layout_width="wrap_content"
