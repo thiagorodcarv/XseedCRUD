@@ -40,6 +40,8 @@ public class CadastroActivity extends Activity {
     static public String filePath = "MyFileStorage";
     File myExternalFile;
 
+    //TODO: TIRAR TOAST E FAZER SET ERRROR
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

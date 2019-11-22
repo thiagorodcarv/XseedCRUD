@@ -1,6 +1,7 @@
 package com.example.lojacrud.CarrinhoPackage;
 
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lojacrud.R;
@@ -29,6 +31,7 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
     final Button deleteItem;
     final CardView cardView;
     final CheckBox checkBox;
+    final ConstraintLayout layout;
     CarrinhoListener carrinhoListener;
 
     public CarrinhoHolder(@NonNull final View itemView, final CarrinhoListener carrinhoListener) {
@@ -36,6 +39,7 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
         this.carrinhoListener = carrinhoListener;
         nome = itemView.findViewById(R.id.nome_produto_item_historico);
         nome.setOnLongClickListener(this);
+        layout = itemView.findViewById(R.id.layout_carrinho);
         preco = itemView.findViewById(R.id.preco_produto_item_historico);
         cardView = itemView.findViewById(R.id.cardViewCarrinhoQTD);
         qtd = itemView.findViewById(R.id.qtd_destaque);
@@ -85,7 +89,8 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
 
     @Override
     public boolean onLongClick(View v) {
-        carrinhoListener.onCheckListener(getAdapterPosition(),true);
+        carrinhoListener.onCheckListener(getAdapterPosition(),!checkBox.isChecked());
+        //TODO AJEITAR A SELEÇÃO
         return true;
     }
 }

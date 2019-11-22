@@ -22,5 +22,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="TextAppearance.AppCompat.Foda">
+        <item name="android:background">@drawable/bordacardview</item>
+    </style>
 
 </resources>
