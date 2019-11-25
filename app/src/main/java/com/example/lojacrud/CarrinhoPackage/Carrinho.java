@@ -75,7 +75,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         }
         setImageHolder(produtosCarrinho);
         carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, checkBoxEnabler);
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+//        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(carrinhoAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         carrinhoAdapter.notifyDataSetChanged();
@@ -133,25 +133,51 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
 
     @Override
     public void onCheckListener(int position, boolean isChecked) {
-        if (!isChecked){
+        if (checkBoxEnabler==false && isChecked){
+            checkBoxEnabler = true;
+            //deleteMenu.setVisible(true);
+            carrinhoAdapter.changeMode(checkBoxEnabler);
+        }
+        if (isChecked==false){
             produtosDelete.remove(produtosCarrinho.get(position));
             produtosCarrinho.get(position).setChecked(false);
+            recyclerView.post(new Runnable()
+            {
+                @Override
+                public void run() {
+                    carrinhoAdapter.notifyDataSetChanged();
+                }
+            });
+            /*
+            You use your RecyclerView instance and inside the post method a new Runnable added to the message queue.
+            The runnable will be run on the user interface thread. This is a limit for Android to access the UI thread from background
+            (e.g. inside a method which will be run in a background thread). for more you run it on UI thread if you needed.
+
+             This seems to be a bug in the RecyclerView library, when notifyDataSetChanged() is called either in quick succession
+              (within 50 ms) or whilst scrolling -- even if it's called outside of onBindViewHolder().
+               For example, it happens when refreshing the whole list with notifyDataSetChanged(), not necessarily adding or removing items.
+               The Runnable suggestion works well.
+             */
             //Toast.makeText(getActivity(), produtosView.get(position).getNome()+" Removido", Toast.LENGTH_SHORT).show();
 
         }
         else {
-            if (!checkBoxEnabler){
-                checkBoxEnabler = true;
-                //deleteMenu.setVisible(true);
-                carrinhoAdapter.changeMode(checkBoxEnabler);
-            }
+
             if(!(produtosDelete.contains(produtosCarrinho.get(position)))){
                 produtosCarrinho.get(position).setChecked(true);
                 produtosDelete.add(produtosCarrinho.get(position));
+                recyclerView.post(new Runnable()
+                {
+                    @Override
+                    public void run() {
+                        carrinhoAdapter.notifyDataSetChanged();
+                    }
+                });
 //                Toast.makeText(this, produtosCarrinho.get(position).getNome()+" Adicionado", Toast.LENGTH_SHORT).show();
             }
 
         }
+
     }
 
     public void abrircheckboxes(final MenuItem menuItem){
@@ -222,21 +248,21 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         conteudo += "\t totalizando o valor de: "+ precoTotal.toString();
         return conteudo;
     }
-
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            produtosCarrinho.remove(viewHolder.getAdapterPosition());
-            carrinhoAdapter.notifyDataSetChanged();
-            setImageHolder(produtosCarrinho);
-            setPrecoTotalView();
-        }
-    };
+//
+//    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+//        @Override
+//        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+//            return false;
+//        }
+//
+//        @Override
+//        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+//            produtosCarrinho.remove(viewHolder.getAdapterPosition());
+//            carrinhoAdapter.notifyDataSetChanged();
+//            setImageHolder(produtosCarrinho);
+//            setPrecoTotalView();
+//        }
+//    };
 
 
     @Override

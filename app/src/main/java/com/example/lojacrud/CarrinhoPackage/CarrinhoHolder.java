@@ -90,7 +90,6 @@ public class CarrinhoHolder extends RecyclerView.ViewHolder implements Button.On
     @Override
     public boolean onLongClick(View v) {
         carrinhoListener.onCheckListener(getAdapterPosition(),!checkBox.isChecked());
-        //TODO AJEITAR A SELEÇÃO
         return true;
     }
 }

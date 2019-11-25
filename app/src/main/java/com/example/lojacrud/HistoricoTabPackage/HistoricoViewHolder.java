@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lojacrud.R;
 
-public class HistoricoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class HistoricoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
 //    TextView nome;
 //    TextView preco;
@@ -29,11 +29,18 @@ public class HistoricoViewHolder extends RecyclerView.ViewHolder implements View
         layoutHistorico = itemView.findViewById(R.id.card_produto_historico);
         data = itemView.findViewById(R.id.data_historico);
         layoutHistorico.setOnClickListener(this);
+        layoutHistorico.setOnLongClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
         historicoListener.onCardClick(getAdapterPosition());
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+
+        return true;
     }
 }

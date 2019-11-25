@@ -39,6 +39,8 @@ public class DestaquesTab extends Fragment implements Auxiliar, ClickOnItems {
     private ProdutosDestaquesAdapter adapter;
     private ListDataModel pViewModel;
     private Map<Integer, Boolean> mapaChecks;
+    private final int SINGLETON_DETAIL_POPUP = 1;
+    private boolean popupExists = false;
 
     public DestaquesTab() {
         // Required empty public constructor
@@ -136,9 +138,22 @@ public class DestaquesTab extends Fragment implements Auxiliar, ClickOnItems {
     @Override
     public void onImgClickedListener(int position) {
         Produtos produto = produtosView.get(position);
-        Intent intent = new Intent(getActivity(), PopUp.class);
-        intent.putExtra("produto",produto);
-        startActivity(intent);
+        if(!popupExists){
+            popupExists = true;
+            Intent intent = new Intent(getActivity(), PopUp.class);
+            // Adds the product Info to the Intent, so that can be fetched later on
+            intent.putExtra("produto",produto);
+            startActivityForResult(intent, SINGLETON_DETAIL_POPUP);
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case SINGLETON_DETAIL_POPUP:
+                popupExists = false;
+        }
     }
 
     @Override

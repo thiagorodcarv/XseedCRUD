@@ -9,24 +9,30 @@
         android:roundIcon="@mipmap/storeicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ItemHistoricoPackage.ItemHistoricoActivity"
-            android:theme="@style/AppTheme.CustomTheme.Padrao"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".Usuario.UsuarioCadastro"></activity>
+        <activity android:name=".Usuario.Login" />
+        <activity
+            android:name=".ItemHistoricoPackage.ItemHistoricoActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.CustomTheme.Padrao" />
         <activity
             android:name=".ImagemDetalhesPopUp"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".DetalhesActivity" />
-        <activity android:name=".CarrinhoPackage.Carrinho"
+        <activity
+            android:name=".CarrinhoPackage.Carrinho"
             android:configChanges="orientation"
-            android:theme="@style/AppTheme.CustomTheme.Padrao"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.CustomTheme.Padrao" />
         <activity
             android:name=".PopUp"
             android:theme="@style/AppTheme.CustomTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
-        <activity android:name=".CadastroActivity"
-            android:configChanges="orientation"/>
-        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".CadastroActivity"
+            android:configChanges="orientation" />
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

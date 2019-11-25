@@ -170,7 +170,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="number|numberDecimal"
-                        android:hint="Preço de Desconto*" />
+                        android:hint="Preço de Desconto" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -15,11 +15,11 @@ public class Conexao extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table produtos(id integer primary key autoincrement," +
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table produtos(id integer primary key autoincrement," +
                 "nome varchar(50),preco varchar(10),precodesconto varchar(10)," +
                 "departamento varchar(70))");
-        sqLiteDatabase.execSQL("create table vendas(id_produto integer," +
+        db.execSQL("create table vendas(id_produto integer," +
                 "data datetime default current_timestamp,preco_cada varchar(10),quantidade integer," +
                 "primary key (id_produto, data))");
     }
@@ -27,6 +27,8 @@ public class Conexao extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("create table usuario(id integer primary key autoincrement," +
+                "nome varchar(50) not null, login varchar(10) unique not null, email varchar(40) unique not null," +
+                " senha varchar(20) not null, tipo_de_usuario integer not null)");
     }
 }

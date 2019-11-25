@@ -59,11 +59,13 @@ public class CarrinhoAdapter extends RecyclerView.Adapter {
             holder.checkBox.setVisibility(View.GONE);
             holder.deleteItem.setVisibility(View.VISIBLE);
         }
-        if (produto.getChecked()==true){
+        if (produto.getChecked()){
             holder.checkBox.setChecked(true);
+            holder.layout.setBackgroundResource(R.drawable.custom_buttom_default);
         }
-        else {
+        else{
             holder.checkBox.setChecked(false);
+            holder.layout.setBackgroundResource(R.drawable.bordacardview);
         }
 
         Double precoTotal;

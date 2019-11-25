@@ -12,6 +12,7 @@
             android:id="@+id/lista_produtos_destaques"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:splitMotionEvents="false"
             android:visibility="gone"
             tools:listitem="@layout/produtos_destaques_adapter"/>
         <ImageView
