@@ -40,7 +40,7 @@ public class HistoricoViewHolder extends RecyclerView.ViewHolder implements View
 
     @Override
     public boolean onLongClick(View v) {
-
+        historicoListener.onLongCardClick(getAdapterPosition());
         return true;
     }
 }
