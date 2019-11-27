@@ -46,9 +46,10 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     private HistoricoDAO historicoDAO;
     private ProdutosDAO produtosDAO;
     private FrameLayout frameLayout;
-    private MenuItem deleteMenu;
+    private MenuItem checkAllItem;
     private FloatingActionButton fab;
     private ImageView imagePlaceHolder;
+    private boolean checkedAll = false;
     private int positionMenu = -1;
     private Boolean checkBoxEnabler = false;
     private List<Produtos> produtosDelete = new ArrayList<>();
@@ -108,7 +109,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_carrinho,menu);
-        deleteMenu = menu.findItem(R.id.delete_menu_carrinho);
+        checkAllItem = menu.findItem(R.id.check_all);
         return true;
     }
 
@@ -136,7 +137,13 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         if (checkBoxEnabler==false && isChecked){
             checkBoxEnabler = true;
             //deleteMenu.setVisible(true);
-            carrinhoAdapter.changeMode(checkBoxEnabler);
+            recyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    carrinhoAdapter.changeMode(checkBoxEnabler);
+                    checkAllItem.setVisible(checkBoxEnabler);
+                }
+            });
         }
         if (isChecked==false){
             produtosDelete.remove(produtosCarrinho.get(position));
@@ -180,6 +187,13 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
 
     }
 
+    public void checkAll(MenuItem menuItem){
+        checkedAll = !checkedAll;
+        for(int i = 0;i<produtosCarrinho.size();i++){
+            onCheckListener(i,checkedAll);
+        }
+    }
+
     public void abrircheckboxes(final MenuItem menuItem){
         if(checkBoxEnabler && (produtosDelete.size()>0)){
             AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Atenção")
@@ -191,6 +205,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
                             produtosCarrinho.removeAll(produtosDelete);
                             produtosDelete.clear();
                             carrinhoAdapter.changeMode(checkBoxEnabler);
+                            checkAllItem.setVisible(checkBoxEnabler);
                             setImageHolder(produtosCarrinho);
                             setPrecoTotalView();
                         }
@@ -200,6 +215,8 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         else {
             //deleteMenu.setVisible(true);
             carrinhoAdapter.changeMode(!checkBoxEnabler);
+            checkAllItem.setVisible(!checkBoxEnabler); //TESTAR
+
         }
         checkBoxEnabler = !checkBoxEnabler;
     }
