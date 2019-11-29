@@ -27,6 +27,7 @@ public class BottomSendPopUp extends BottomSheetDialogFragment {
     Button email;
     Button whatsapp;
 
+
     public BottomSendPopUp(HistoricoDAO dao, List<Produtos> produtosCarrinho, String conteudo){
         this.dao = dao;
         this.produtosCarrinho = produtosCarrinho;
@@ -55,7 +56,7 @@ public class BottomSendPopUp extends BottomSheetDialogFragment {
         whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PackageManager pm = getActivity().getPackageManager(); //TODO COLOCAR AS MENSAGENS RECEBIDAS NA MAIN ACTIVITY
+                PackageManager pm = getActivity().getPackageManager(); //TODO COLOCAR AS MENSAGENS RECEBIDAS NA MAIN ACTIVITY em OnActivityResult
                 try {
 
 
