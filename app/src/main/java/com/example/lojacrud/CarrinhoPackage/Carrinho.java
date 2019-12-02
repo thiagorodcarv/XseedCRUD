@@ -76,7 +76,7 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         }
         setImageHolder(produtosCarrinho);
         carrinhoAdapter = new CarrinhoAdapter(this,produtosCarrinho,this, checkBoxEnabler);
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+//        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(carrinhoAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         carrinhoAdapter.notifyDataSetChanged();
@@ -265,20 +265,20 @@ public class Carrinho extends AppCompatActivity implements CarrinhoListener, Pop
         return conteudo;
     }
 
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            produtosCarrinho.remove(viewHolder.getAdapterPosition());
-            carrinhoAdapter.notifyDataSetChanged();
-            setImageHolder(produtosCarrinho);
-            setPrecoTotalView();
-        }
-    };
+//    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+//        @Override
+//        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+//            return false;
+//        }
+//
+//        @Override
+//        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+//            produtosCarrinho.remove(viewHolder.getAdapterPosition());
+//            carrinhoAdapter.notifyDataSetChanged();
+//            setImageHolder(produtosCarrinho);
+//            setPrecoTotalView();
+//        }
+//    };
 
 
     @Override

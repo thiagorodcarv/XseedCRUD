@@ -1,9 +1,11 @@
 package com.example.lojacrud.CarrinhoPackage;
 
+import android.graphics.Paint;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.PathInterpolator;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
